@@ -15,7 +15,11 @@ import { User } from './user/user';
       <ul id="users">
         @for (user of users(); track user.id) {
         <li>
-          <app-user [user]="user" (select)="onSelectUser($event)" />
+          <app-user
+            [user]="user"
+            [selected]="user.id === selectedUserId()"
+            (select)="onSelectUser($event)"
+          />
         </li>
         }
       </ul>

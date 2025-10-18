@@ -6,7 +6,7 @@ import { UserInput } from './user.model';
   imports: [],
   template: `
     <div>
-      <button (click)="onSelectUser()">
+      <button [class.active]="selected()" (click)="onSelectUser()">
         <img [src]="imagePath()" [alt]="user().name" />
         <span>{{ user().name }}</span>
       </button>
@@ -17,6 +17,7 @@ import { UserInput } from './user.model';
 export class User {
   user = input.required<UserInput>();
   select = output<string>();
+  selected = input.required<boolean>();
 
   imagePath = computed(() => `users/${this.user().avatar}`);
 
