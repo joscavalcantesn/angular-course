@@ -1,4 +1,5 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, input, signal } from '@angular/core';
+import { DUMMY_TASKS } from './task/mock/dummy-tasks';
 import { Task } from './task/task';
 
 @Component({
@@ -14,14 +15,20 @@ import { Task } from './task/task';
       </header>
 
       <ul>
+        @for (task of selectedUserTasks(); track task.id) {
         <li>
-          <app-task />
+          <app-task [task]="task" />
         </li>
+        }
       </ul>
     </section>
   `,
   styleUrl: 'tasks.scss',
 })
 export class Tasks {
+  id = input.required<string | null>();
   username = input.required<string>();
+  tasks = signal(DUMMY_TASKS);
+
+  selectedUserTasks = computed(() => this.tasks().filter((task) => task.userId === this.id()));
 }

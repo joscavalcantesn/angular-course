@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-task',
   imports: [],
   template: `
     <article>
-      <h3>Task Title</h3>
-      <time>Due Date</time>
-      <p>Summary</p>
+      <h3>{{ task().title }}</h3>
+      <time>{{ task().dueDate }}</time>
+      <p>{{ task().summary }}</p>
       <div class="actions">
         <button>Complete</button>
       </div>
@@ -15,4 +15,6 @@ import { Component } from '@angular/core';
   `,
   styleUrl: 'task.scss',
 })
-export class Task {}
+export class Task {
+  task = input.required<TaskInput>();
+}

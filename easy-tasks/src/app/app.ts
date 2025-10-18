@@ -21,7 +21,7 @@ import { User } from './user/user';
       </ul>
 
       @if(selectedUserId()) {
-      <app-tasks [username]="selectedUserName()" />
+      <app-tasks [id]="selectedUserId()" [username]="selectedUserName()" />
       } @else {
       <h2 id="fallback">Select a user to see their tasks!</h2>
       }
