@@ -1,16 +1,17 @@
 import { Component, computed, input, output } from '@angular/core';
+import { Card } from "../shared/card/card";
 import { UserInput } from './user.model';
 
 @Component({
   selector: 'app-user',
-  imports: [],
+  imports: [Card],
   template: `
-    <div>
+    <app-card>
       <button [class.active]="selected()" (click)="onSelectUser()">
         <img [src]="imagePath()" [alt]="user().name" />
         <span>{{ user().name }}</span>
       </button>
-    </div>
+    </app-card>
   `,
   styleUrl: 'user.scss',
 })
