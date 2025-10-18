@@ -43,18 +43,27 @@ Then open: http://localhost:4200
 
 ```
 easy-tasks/
- ├── public/               # Public assets (favicon, logo, etc.)
+ ├── public/                 # Public assets (favicon, logo, etc.)
  ├── src/
  │   ├── app/
- │   │   ├── header/       # Header component
- │   │   ├── app.config.ts # Application configuration
- │   │   ├── app.routes.ts # Application routes
- │   │   └── app.ts        # Root component
- │   ├── index.html        # Main entry HTML
- │   ├── main.ts           # Application bootstrap
- │   └── styles.scss       # Global styles
+ │   │   ├── header/         # Header component
+ │   │   │   ├── header.ts
+ │   │   │   └── header.scss
+ │   │   ├── user/           # User component
+ │   │   │   ├── user.ts
+ │   │   │   └── user.scss
+ │   │   ├── app.config.ts   # Application configuration
+ │   │   ├── app.routes.ts   # Application routes
+ │   │   ├── app.scss        # Root styles
+ │   │   ├── app.ts          # Root component
+ │   │   └── dummy-users.ts  # Mock user data
+ │   ├── index.html          # Main entry HTML
+ │   ├── main.ts             # Application bootstrap
+ │   └── styles.scss         # Global styles
  ├── package.json
- ├── angular.json
+ ├── package-lock.json
  ├── tsconfig.json
+ ├── tsconfig.app.json
+ ├── angular.json
  └── README.md
 ```
