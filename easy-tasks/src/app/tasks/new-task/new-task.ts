@@ -12,15 +12,15 @@ import { FormsModule } from '@angular/forms';
         <h2>New Task</h2>
         <div>
           <label for="title">Title</label>
-          <input type="text" id="title" name="title" [(ngModel)]="title" required />
+          <input type="text" id="title" name="title" [(ngModel)]="enteredTitle" required />
         </div>
         <div>
           <label for="summary">Summary</label>
-          <textarea id="summary" rows="5" name="summary" [(ngModel)]="summary" required></textarea>
+          <textarea id="summary" rows="5" name="summary" [(ngModel)]="enteredSummary" required></textarea>
         </div>
         <div>
           <label for="due-date">Due Date</label>
-          <input type="date" id="due-date" name="due-date" [(ngModel)]="dueDate" required />
+          <input type="date" id="due-date" name="due-date" [(ngModel)]="enteredDate" required />
         </div>
         <div class="actions">
           <button type="button" (click)="onCancel()">Cancel</button>
@@ -35,9 +35,9 @@ export class NewTask {
   cancel = output<void>();
   add = output<{ title: string; summary: string; dueDate: string }>();
 
-  title = '';
-  summary = '';
-  dueDate = '';
+  enteredTitle = '';
+  enteredSummary = '';
+  enteredDate = '';
 
   onCancel() {
     this.cancel.emit();
@@ -45,9 +45,9 @@ export class NewTask {
 
   onSubmit() {
     this.add.emit({
-      title: this.title,
-      summary: this.summary,
-      dueDate: this.dueDate,
+      title: this.enteredTitle,
+      summary: this.enteredSummary,
+      dueDate: this.enteredDate,
     });
   }
 }
