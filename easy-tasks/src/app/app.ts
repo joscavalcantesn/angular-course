@@ -37,7 +37,7 @@ import { User } from './user/user';
 })
 export class App {
   users = signal(DUMMY_USERS);
-  selectedUserId = signal<string | null>(null);
+  selectedUserId = signal<string>('');
 
   selectedUserName = computed(
     () => this.users().find((user) => user.id === this.selectedUserId()!)?.name ?? ''

@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 
 @Component({
   selector: 'app-task',
@@ -9,7 +9,7 @@ import { Component, input } from '@angular/core';
       <time>{{ task().dueDate }}</time>
       <p>{{ task().summary }}</p>
       <div class="actions">
-        <button>Complete</button>
+        <button (click)="onCompleteTask()">Complete</button>
       </div>
     </article>
   `,
@@ -17,4 +17,9 @@ import { Component, input } from '@angular/core';
 })
 export class Task {
   task = input.required<TaskInput>();
+  complete = output<string>();
+
+  onCompleteTask() {
+    this.complete.emit(this.task().id);
+  }
 }
