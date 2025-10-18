@@ -1,5 +1,6 @@
 import { Component, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { NewTaskInput } from '../task/task.model';
 
 @Component({
   selector: 'app-new-task',
@@ -16,7 +17,13 @@ import { FormsModule } from '@angular/forms';
         </div>
         <div>
           <label for="summary">Summary</label>
-          <textarea id="summary" rows="5" name="summary" [(ngModel)]="enteredSummary" required></textarea>
+          <textarea
+            id="summary"
+            rows="5"
+            name="summary"
+            [(ngModel)]="enteredSummary"
+            required
+          ></textarea>
         </div>
         <div>
           <label for="due-date">Due Date</label>
@@ -33,7 +40,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class NewTask {
   cancel = output<void>();
-  add = output<{ title: string; summary: string; dueDate: string }>();
+  add = output<NewTaskInput>();
 
   enteredTitle = '';
   enteredSummary = '';

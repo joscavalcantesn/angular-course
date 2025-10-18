@@ -2,6 +2,7 @@ import { Component, computed, input, signal } from '@angular/core';
 import { NewTask } from './new-task/new-task';
 import { DUMMY_TASKS } from './task/mock/dummy-tasks';
 import { Task } from './task/task';
+import { NewTaskInput } from './task/task.model';
 
 @Component({
   selector: 'app-tasks',
@@ -50,7 +51,7 @@ export class Tasks {
     this.isAddingTask.set(false);
   }
 
-  onAddTask(taskInput: { title: string; summary: string; dueDate: string }) {
+  onAddTask(taskInput: NewTaskInput) {
     this.tasks.update((tasks) => [
       ...tasks,
       {
