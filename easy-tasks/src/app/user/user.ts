@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { DUMMY_USERS } from '../dummy-users';
 
-const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length)
+const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 
 @Component({
   selector: 'app-user',
@@ -10,8 +10,8 @@ const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length)
   template: `
     <div>
       <button>
-        <img [src]="'users/' + selectedUser.avatar" [alt]="selectedUser.name" />
-        <span>{{ selectedUser.name}}</span>
+        <img [src]="imagePath" [alt]="selectedUser.name" />
+        <span>{{ selectedUser.name }}</span>
       </button>
     </div>
   `,
@@ -19,4 +19,8 @@ const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length)
 })
 export class User {
   selectedUser = DUMMY_USERS[randomIndex];
+
+  get imagePath() {
+    return `users/${this.selectedUser.avatar}`;
+  }
 }
