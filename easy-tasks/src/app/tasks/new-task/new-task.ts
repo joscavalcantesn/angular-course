@@ -13,10 +13,14 @@ import { FormsModule } from '@angular/forms';
         <div>
           <label for="title">Title</label>
           <input type="text" id="title" name="title" [(ngModel)]="title" required />
-        </div>
+        </div>p
         <div>
           <label for="summary">Summary</label>
+<<<<<<< HEAD
           <textarea id="summary" rows="5" name="summary" [(ngModel)]="summary" required></textarea>
+=======
+          <textarea id="summary" name="summary" [(ngModel)]="summary" required></textarea>
+>>>>>>> 6056b90de18a3e85ba566bd4366bfcbd38cdf7ff
         </div>
         <div>
           <label for="due-date">Due Date</label>
