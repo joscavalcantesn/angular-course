@@ -1,12 +1,12 @@
-import { Component, output } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NewTaskInput } from '../task/task.model';
+import { TasksService } from '../tasks.service';
 
 @Component({
   selector: 'app-new-task',
   imports: [FormsModule],
   template: `
-    <div class="backdrop" (click)="onCancel()"></div>
+    <div class="backdrop" (click)="onClose()"></div>
 
     <dialog open>
       <form (ngSubmit)="onSubmit()">
@@ -30,7 +30,7 @@ import { NewTaskInput } from '../task/task.model';
           <input type="date" id="due-date" name="due-date" [(ngModel)]="enteredDate" required />
         </div>
         <div class="actions">
-          <button type="button" (click)="onCancel()">Cancel</button>
+          <button type="button" (click)="onClose()">Cancel</button>
           <button type="submit">Add</button>
         </div>
       </form>
@@ -39,22 +39,28 @@ import { NewTaskInput } from '../task/task.model';
   styleUrl: 'new-task.scss',
 })
 export class NewTask {
-  cancel = output<void>();
-  add = output<NewTaskInput>();
+  private tasksService = inject(TasksService);
+
+  userId = input.required<string>();
+  close = output<void>();
 
   enteredTitle = '';
   enteredSummary = '';
   enteredDate = '';
 
-  onCancel() {
-    this.cancel.emit();
+  onClose() {
+    this.close.emit();
   }
 
   onSubmit() {
-    this.add.emit({
-      title: this.enteredTitle,
-      summary: this.enteredSummary,
-      dueDate: this.enteredDate,
-    });
+    this.tasksService.addTask(
+      {
+        title: this.enteredTitle,
+        summary: this.enteredSummary,
+        dueDate: this.enteredDate,
+      },
+      this.userId()
+    );
+    this.close.emit();
   }
 }

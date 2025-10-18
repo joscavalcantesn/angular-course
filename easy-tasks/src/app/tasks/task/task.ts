@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
-import { Component, input, output } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { Card } from '../../shared/card/card';
+import { TasksService } from '../tasks.service';
 import { TaskInput } from './task.model';
 
 @Component({
@@ -21,10 +22,11 @@ import { TaskInput } from './task.model';
   styleUrl: 'task.scss',
 })
 export class Task {
+  private tasksService = inject(TasksService);
+
   task = input.required<TaskInput>();
-  complete = output<string>();
 
   onCompleteTask() {
-    this.complete.emit(this.task().id);
+    this.tasksService.removeTask(this.task().id);
   }
 }

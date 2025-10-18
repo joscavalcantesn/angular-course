@@ -1,15 +1,14 @@
-import { Component, computed, input, signal } from '@angular/core';
+import { Component, computed, inject, input, signal } from '@angular/core';
 import { NewTask } from './new-task/new-task';
-import { DUMMY_TASKS } from './task/mock/dummy-tasks';
 import { Task } from './task/task';
-import { NewTaskInput } from './task/task.model';
+import { TasksService } from './tasks.service';
 
 @Component({
   selector: 'app-tasks',
   imports: [Task, NewTask],
   template: `
     @if (isAddingTask()) {
-    <app-new-task (cancel)="onCancelAddTask()" (add)="onAddTask($event)" />
+    <app-new-task [userId]="userId()" (close)="onCloseAddTask()" />
     }
 
     <section id="tasks">
@@ -23,7 +22,7 @@ import { NewTaskInput } from './task/task.model';
       <ul>
         @for (task of selectedUserTasks(); track task.id) {
         <li>
-          <app-task [task]="task" (complete)="onCompleteTask($event)" />
+          <app-task [task]="task" />
         </li>
         }
       </ul>
@@ -32,36 +31,21 @@ import { NewTaskInput } from './task/task.model';
   styleUrl: 'tasks.scss',
 })
 export class Tasks {
-  id = input.required<string>();
+  private tasksService = inject(TasksService);
+
+  userId = input.required<string>();
   username = input.required<string>();
-  tasks = signal(DUMMY_TASKS);
   isAddingTask = signal(false);
 
-  selectedUserTasks = computed(() => this.tasks().filter((task) => task.userId === this.id()));
-
-  onCompleteTask(taskId: string) {
-    this.tasks.update((tasks) => tasks.filter((task) => task.id !== taskId));
-  }
+  selectedUserTasks = computed(() =>
+    this.tasksService.allTasks().filter((task) => task.userId === this.userId())
+  );
 
   onStartAddTask() {
     this.isAddingTask.set(true);
   }
 
-  onCancelAddTask() {
-    this.isAddingTask.set(false);
-  }
-
-  onAddTask(taskInput: NewTaskInput) {
-    this.tasks.update((tasks) => [
-      ...tasks,
-      {
-        id: new Date().getTime().toString(),
-        userId: this.id(),
-        title: taskInput.title,
-        summary: taskInput.summary,
-        dueDate: taskInput.dueDate,
-      },
-    ]);
+  onCloseAddTask() {
     this.isAddingTask.set(false);
   }
 }
