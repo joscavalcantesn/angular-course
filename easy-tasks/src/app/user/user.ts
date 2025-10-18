@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 
-import { DUMMY_USERS } from '../dummy-users';
+import { DUMMY_USERS } from './mock/dummy-users';
 
 const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 
@@ -9,18 +9,21 @@ const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
   imports: [],
   template: `
     <div>
-      <button>
-        <img [src]="imagePath" [alt]="selectedUser.name" />
-        <span>{{ selectedUser.name }}</span>
+      <button (click)="onSelectUser()">
+        <img [src]="imagePath()" [alt]="selectedUser().name" />
+        <span>{{ selectedUser().name }}</span>
       </button>
     </div>
   `,
   styleUrl: 'user.scss',
 })
 export class User {
-  selectedUser = DUMMY_USERS[randomIndex];
+  selectedUser = signal(DUMMY_USERS[randomIndex]);
 
-  get imagePath() {
-    return `users/${this.selectedUser.avatar}`;
+  imagePath = computed(() => `users/${this.selectedUser().avatar}`);
+
+  onSelectUser() {
+    const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
+    this.selectedUser.set(DUMMY_USERS[randomIndex]);
   }
 }
