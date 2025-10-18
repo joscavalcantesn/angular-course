@@ -1,0 +1,15 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-header',
+  imports: [],
+  template: `
+    <header>
+      <img src="task-management-logo.png" alt="A todo list" />
+      <h1>Easy Task</h1>
+      <p>Enterprise-level task management without friction</p>
+    </header>
+  `,
+  styleUrl: 'header.scss',
+})
+export class Header {}
