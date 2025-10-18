@@ -6,6 +6,14 @@ import { NewTaskInput } from './task/task.model';
 export class TasksService {
   private tasks = signal(DUMMY_TASKS);
 
+  constructor() {
+    const savedTasks = localStorage.getItem('tasks');
+
+    if (savedTasks) {
+      this.tasks.set(JSON.parse(savedTasks));
+    }
+  }
+
   allTasks = this.tasks.asReadonly();
 
   addTask(taskInput: NewTaskInput, userId: string) {
@@ -19,9 +27,15 @@ export class TasksService {
         dueDate: taskInput.dueDate,
       },
     ]);
+    this.saveTasks();
   }
 
   removeTask(id: string) {
     this.tasks.update((tasks) => tasks.filter((task) => task.id !== id));
+    this.saveTasks();
+  }
+
+  private saveTasks() {
+    localStorage.setItem('tasks', JSON.stringify(this.tasks()));
   }
 }
