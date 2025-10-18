@@ -1,0 +1,10 @@
+# Garante fim de linha consistente
+* text=auto eol=lf
+
+# Trata arquivos específicos
+*.ts text diff=typescript
+*.html text
+*.css text
+*.scss text
+*.json text
+*.md text
