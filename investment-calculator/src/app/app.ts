@@ -1,13 +1,10 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
+import { Header } from './header/header';
 
 @Component({
   selector: 'app-root',
-  imports: [],
-  template: `
-    <h1 class="center">Welcome to {{ title() }}!</h1>
-  `,
+  imports: [Header],
+  template: ` <app-header /> `,
   styles: [],
 })
-export class App {
-  protected readonly title = signal('Investment Calculator');
-}
+export class App {}
