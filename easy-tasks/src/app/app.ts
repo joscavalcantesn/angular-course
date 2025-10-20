@@ -1,5 +1,4 @@
 import { Component, computed, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { Header } from './header/header';
 import { Tasks } from './tasks/tasks';
 import { DUMMY_USERS } from './user/mock/dummy-users';
@@ -7,7 +6,7 @@ import { User } from './user/user';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, User, Tasks],
+  imports: [Header, User, Tasks],
   template: `
     <app-header></app-header>
 
@@ -30,8 +29,6 @@ import { User } from './user/user';
       <h2 id="fallback">Select a user to see their tasks!</h2>
       }
     </main>
-
-    <router-outlet />
   `,
   styleUrl: 'app.scss',
 })
