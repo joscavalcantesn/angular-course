@@ -70,7 +70,6 @@ easy-tasks/
 │   │   │   ├── mock/             # User mock data
 │   │   │   └── user.ts           # User card component
 │   │   ├── app.config.ts
-│   │   ├── app.routes.ts
 │   │   ├── app.scss
 │   │   └── app.ts                # Root component
 │   ├── index.html
